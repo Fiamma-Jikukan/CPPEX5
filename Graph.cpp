@@ -3,6 +3,8 @@
 #include <iostream>
 #include <ostream>
 
+template class Graph<int>;
+
 template<class T>
 Graph<T>::Graph() : vertices({}), adjList({{}}) {
 }
@@ -36,7 +38,7 @@ void Graph<T>::AddVertex(T vertex) {
     unsigned int size = vertices.size();
     if (index == -1) {
         vertices.push_back(vertex);
-        for (unsigned int i = 0; i < size; i++) {
+        for (unsigned int i = 0; i <= size; i++) {
             adjList[i].push_back(0);
         }
         const vector<double> new_vertex(size + 1, 0);
@@ -97,9 +99,9 @@ template<class T>
 vector<T> Graph<T>::GetNeighbors(T vertex) {
     const unsigned int index = Graph<T>::getVertexIndex(vertex);
     vector<T> neighbors;
-    for (double & i : adjList[index]) {
-        if (i != 0) {
-            neighbors.push_back(i);
+    for (unsigned int i = 0; i < adjList[index].size(); i++) {
+        if (adjList[index][i] != 0) {
+            neighbors.push_back(vertices[i]);
         }
     }
     return neighbors;
@@ -116,7 +118,7 @@ vector<T> Graph<T>::GetSources(T target) {
     vector<T> sources;
     for (unsigned int i = 0; i < vertices.size(); i++) {
         if (adjList[i][target_index] != 0) {
-            sources.push_back(adjList[i][target_index]);
+            sources.push_back(vertices[i]);
         }
     }
     return sources;
@@ -128,6 +130,14 @@ void Graph<T>::PrintGraph() {
     const unsigned int size = vertices.size();
     for (unsigned int i = 0; i < size; i++) {
         T vertex = vertices[i];
-        cout << GetNeighbors(vertex) << endl;
+        vector<T> neighbors = GetNeighbors(vertex);
+        cout << vertex << ": ";
+        for (unsigned int j = 0; j < neighbors.size(); j++) {
+            T neighbor = neighbors[j];
+            cout << neighbor << " ";
+        }
+        cout << endl;
     }
+
 }
+

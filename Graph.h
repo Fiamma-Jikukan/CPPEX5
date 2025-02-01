@@ -1,12 +1,13 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+#include <ostream>
 #include <vector>
 using namespace std;
 
 template<class T>
 class Graph {
 private:
-    vector<vector<T>> vertices;
+    vector<T> vertices;
     vector<vector<double>> adjList;
 
 public:
@@ -26,6 +27,7 @@ public:
     vector<T> GetConnected(T vertex);
     vector<T> GetSources(T target);
     void PrintGraph();
+
 
 
 };
