@@ -1,0 +1,10 @@
+LOL	syp	10
+syp	LOL	10
+LiL	sup	9
+Tel	what	52
+Telvar	what	45
+LOL	syp	10
+LiL	sup	9
+Tel	what	52
+Telvar	what	45
+LOL	exi	11

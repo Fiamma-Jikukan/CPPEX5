@@ -27,6 +27,8 @@ public:
     vector<T> GetConnected(T vertex);
     vector<T> GetSources(T target);
     void PrintGraph();
+    friend ostream& operator<<(ostream& os, const Graph& graph);
+
 
 
 

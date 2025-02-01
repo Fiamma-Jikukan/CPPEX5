@@ -4,6 +4,7 @@
 #include <ostream>
 
 template class Graph<int>;
+template class Graph<string>;
 
 template<class T>
 Graph<T>::Graph() : vertices({}), adjList({{}}) {
@@ -140,4 +141,6 @@ void Graph<T>::PrintGraph() {
     }
 
 }
+
+
 
