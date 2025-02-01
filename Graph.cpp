@@ -21,7 +21,7 @@ template<class T>
 Graph<T> &Graph<T>::operator=(const Graph &other) = default;
 
 template<class T>
-unsigned int Graph<T>::getVertexIndex(T vertex) {
+unsigned int Graph<T>::getVertexIndex(T vertex) const {
     if (vertices.size() == 0) {
         return -1;
     }
@@ -72,7 +72,9 @@ void Graph<T>::AddEdge(T source, T target, const double weight) {
     }
     source_index = Graph<T>::getVertexIndex(source);
     target_index = Graph<T>::getVertexIndex(target);
-    adjList[source_index][target_index] = weight;
+    if (adjList[source_index][target_index] == 0 || (adjList[source_index][target_index] != 0 && adjList[source_index][target_index] > weight)) {
+        adjList[source_index][target_index] = weight;
+    }
 }
 
 template<class T>
@@ -97,7 +99,7 @@ double Graph<T>::GetWeight(T source, T target) {
 }
 
 template<class T>
-vector<T> Graph<T>::GetNeighbors(T vertex) {
+vector<T> Graph<T>::GetNeighbors(T vertex) const {
     const unsigned int index = Graph<T>::getVertexIndex(vertex);
     vector<T> neighbors;
     for (unsigned int i = 0; i < adjList[index].size(); i++) {
@@ -110,7 +112,6 @@ vector<T> Graph<T>::GetNeighbors(T vertex) {
 
 template<class T>
 vector<T> Graph<T>::GetConnected(T vertex) {
-
 }
 
 template<class T>
@@ -123,7 +124,6 @@ vector<T> Graph<T>::GetSources(T target) {
         }
     }
     return sources;
-
 }
 
 template<class T>
@@ -139,8 +139,4 @@ void Graph<T>::PrintGraph() {
         }
         cout << endl;
     }
-
 }
-
-
-
