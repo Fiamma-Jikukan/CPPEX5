@@ -20,17 +20,17 @@ int main(const int argc, char **argv) {
     string output_file = "output.txt";
     for (int i = 1; i < argc; i++) {
         string fileName = argv[i];
-        if (fileName[0] == '[') {
-            string flag = fileName.substr(0, 4);
+        if (fileName[0] == '-' && fileName[1] == 'o') {
+            string flag = fileName.substr(0, 2);
             string name;
-            unsigned int size = fileName.length();
-            if (flag == "[-o]") {
-                output_file = fileName.substr(flag.length());
-                continue;
-            }
+            output_file = fileName.substr(flag.length());
+            continue;
         }
-        if (!ValidateFile(fileName)) {
-            exit(1);
+        try {
+            ValidateFile(fileName);
+        } catch (const string &e) {
+            cerr << e << endl;
+            return 1;
         }
     }
     Graph<string> g;
@@ -45,7 +45,7 @@ int main(const int argc, char **argv) {
 }
 
 void PrintSet(const set<string> &s) {
-    for (const auto & it : s) {
+    for (const auto &it: s) {
         cout << it << " ";
     }
     cout << endl;
@@ -54,7 +54,6 @@ void PrintSet(const set<string> &s) {
 bool ValidateFile(const string &fileName) {
     ifstream input_file(fileName);
     if (!input_file.is_open()) {
-        input_file.close();
         return false;
     }
     string line;
@@ -62,7 +61,7 @@ bool ValidateFile(const string &fileName) {
         stringstream ss(line);
         if (line.find(' ') != string::npos) {
             input_file.close();
-            return false;
+            throw string("Invalid input");
         }
         string source;
         string target;
@@ -70,25 +69,25 @@ bool ValidateFile(const string &fileName) {
         unsigned int minutes;
         if (!(ss >> source >> target >> minuets_str)) {
             input_file.close();
-            return false;
+            throw string("Invalid input");
         }
         string extra;
         if (ss >> extra) {
             input_file.close();
-            return false;
+            throw string("Invalid input");
         }
         if (source == "exit" || target == "exit") {
             input_file.close();
-            return false;
+            throw string("Invalid input");
         }
-        if (source.length() > 16 || target.length() > 16) {
+        if (source.length() >= 16 || target.length() >= 16) {
             input_file.close();
-            return false;
+            throw string("Invalid input");
         }
         for (char ch: minuets_str) {
             if (!isdigit(ch)) {
                 input_file.close();
-                return false;
+                throw string("Invalid input");
             }
         }
         stringstream min(minuets_str);
@@ -123,7 +122,6 @@ void OutputGraph(const string &output_name, const Graph<string> &graph) {
 
 void SearchConnectedNodes(const Graph<string> &graph) {
     string line;
-    cout << "Insert point in Neverland: " << endl;
     while (getline(cin, line)) {
         stringstream ss(line);
         string source;
@@ -133,17 +131,15 @@ void SearchConnectedNodes(const Graph<string> &graph) {
         }
         if (graph.getVertexIndex(source) == -1) {
             cout << source << " does not exist in the current network" << endl;
-            cout << "USAGE: node or 'exit' to terminate";
-        }
-        else {
+            cout << "USAGE: node or 'exit' to terminate" << endl;
+        } else {
             set<string> connected_nodes = graph.GetConnected(source);
             if (connected_nodes.empty()) {
                 cout << source << ": no outbound travel" << endl;
-            }
-            else {
+            } else {
+                cout << source << ": ";
                 PrintSet(connected_nodes);
             }
         }
-        cout << "Insert point in Neverland: " << endl;
     }
 }

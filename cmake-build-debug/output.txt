@@ -1,0 +1,11 @@
+LOL: syp exi 
+syp: LOL Seti 
+LiL: sup 
+sup: 
+Tel: what 
+what: 
+Telvar: what 
+exi: 
+Seti: Atef 
+Atef: Seti 
+

@@ -114,8 +114,6 @@ vector<T> Graph<T>::GetNeighbors(T vertex) const {
 
 template<class T>
 set<T> Graph<T>::GetConnected(T vertex) const {
-    // const unsigned int target_index = Graph<T>::getVertexIndex(vertex);
-    cout << "reached GetConnected with Vertex: " << vertex << "\n";
     set<T> connected;
     queue<T> q;
     q.push(vertex);
