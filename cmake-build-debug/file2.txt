@@ -1,3 +1,0 @@
-syp	Seti	8
-Atef	Seti	10
-Seti	Atef	11

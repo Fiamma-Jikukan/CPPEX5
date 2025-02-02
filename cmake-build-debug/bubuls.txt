@@ -1,11 +1,6 @@
-LOL: syp exi 
-syp: LOL Seti 
-LiL: sup 
-sup: 
-Tel: what 
-what: 
-Telvar: what 
-exi: 
-Seti: Atef 
-Atef: Seti 
+Lelylaan: Heemstedestraat Zuid Amstel Spaklerweg 
+Heemstedestraat: Lelylaan Zuid Spaklerweg 
+Zuid: 
+Amstel: Zuid Spaklerweg 
+Spaklerweg: Lelylaan Heemstedestraat Amstel 
 
