@@ -1,11 +1,11 @@
 LOL: syp exi 
-syp: LOL 
+syp: LOL Seti 
 LiL: sup 
 sup: 
 Tel: what 
 what: 
 Telvar: what 
 exi: 
-Atef: Seti 
 Seti: Atef 
+Atef: Seti 
 

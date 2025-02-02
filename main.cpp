@@ -6,7 +6,7 @@
 #include "Graph.h"
 using namespace std;
 
-void printV(const vector<string> &v);
+void PrintSet(const set<string> &s);
 
 bool ValidateFile(const string &fileName);
 
@@ -44,9 +44,9 @@ int main(const int argc, char **argv) {
     return 0;
 }
 
-void printV(const vector<string> &v) {
-    for (int i = 0; i < v.size(); i++) {
-        cout << v[i] << " ";
+void PrintSet(const set<string> &s) {
+    for (const auto & it : s) {
+        cout << it << " ";
     }
     cout << endl;
 }
@@ -123,6 +123,7 @@ void OutputGraph(const string &output_name, const Graph<string> &graph) {
 
 void SearchConnectedNodes(const Graph<string> &graph) {
     string line;
+    cout << "Insert point in Neverland: " << endl;
     while (getline(cin, line)) {
         stringstream ss(line);
         string source;
@@ -135,13 +136,14 @@ void SearchConnectedNodes(const Graph<string> &graph) {
             cout << "USAGE: node or 'exit' to terminate";
         }
         else {
-            vector<string> connected_nodes = graph.GetNeighbors(source);
+            set<string> connected_nodes = graph.GetConnected(source);
             if (connected_nodes.empty()) {
                 cout << source << ": no outbound travel" << endl;
             }
             else {
-                printV(connected_nodes);
+                PrintSet(connected_nodes);
             }
         }
+        cout << "Insert point in Neverland: " << endl;
     }
 }

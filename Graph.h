@@ -2,6 +2,8 @@
 #define GRAPH_H
 #include <ostream>
 #include <vector>
+#include <set>
+
 using namespace std;
 
 template<class T>
@@ -35,7 +37,7 @@ public:
 
     vector<T> GetNeighbors(T vertex) const;
 
-    vector<T> GetConnected(T vertex);
+    set<T> GetConnected(T vertex) const;
 
     vector<T> GetSources(T target);
 

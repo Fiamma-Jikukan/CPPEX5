@@ -1,9 +1,10 @@
 #include "Graph.h"
 
+#include <deque>
 #include <iostream>
 #include <ostream>
+#include <queue>
 
-template class Graph<int>;
 template class Graph<string>;
 
 template<class T>
@@ -72,7 +73,8 @@ void Graph<T>::AddEdge(T source, T target, const double weight) {
     }
     source_index = Graph<T>::getVertexIndex(source);
     target_index = Graph<T>::getVertexIndex(target);
-    if (adjList[source_index][target_index] == 0 || (adjList[source_index][target_index] != 0 && adjList[source_index][target_index] > weight)) {
+    if (adjList[source_index][target_index] == 0 || (
+            adjList[source_index][target_index] != 0 && adjList[source_index][target_index] > weight)) {
         adjList[source_index][target_index] = weight;
     }
 }
@@ -111,7 +113,25 @@ vector<T> Graph<T>::GetNeighbors(T vertex) const {
 }
 
 template<class T>
-vector<T> Graph<T>::GetConnected(T vertex) {
+set<T> Graph<T>::GetConnected(T vertex) const {
+    // const unsigned int target_index = Graph<T>::getVertexIndex(vertex);
+    cout << "reached GetConnected with Vertex: " << vertex << "\n";
+    set<T> connected;
+    queue<T> q;
+    q.push(vertex);
+    while (q.empty() == false) {
+        T current = q.front();
+        q.pop();
+        if (connected.insert(current).second == false) {
+            continue;
+        }
+        vector<T> neighbors = GetNeighbors(current);
+        for (unsigned int i = 0; i < neighbors.size(); i++) {
+            q.push(neighbors[i]);
+        }
+    }
+    connected.erase(vertex);
+    return connected;
 }
 
 template<class T>
