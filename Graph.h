@@ -3,6 +3,7 @@
 #include <ostream>
 #include <vector>
 #include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
 
     vector<T> GetNeighbors(T vertex) const;
 
-    set<T> GetConnected(T vertex) const;
+    vector<T> GetConnected(T vertex) const;
 
     vector<T> GetSources(T target);
 

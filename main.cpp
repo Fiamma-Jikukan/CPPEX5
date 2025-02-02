@@ -6,7 +6,7 @@
 #include "Graph.h"
 using namespace std;
 
-void PrintConnected(const set<string> &s);
+void PrintConnected(const vector<string> &s);
 
 bool ValidateFile(const string &fileName);
 
@@ -44,10 +44,11 @@ int main(const int argc, char **argv) {
     return 0;
 }
 
-void PrintConnected(const set<string> &s) {
-    for (const auto &it: s) {
-        cout << it << "\t";
+void PrintConnected(const vector<string> &s) {
+    for (unsigned int i = 0; i < s.size(); i++) {
+        cout << s[i] << '\t';
     }
+
     cout << endl;
 }
 
@@ -133,7 +134,7 @@ void SearchConnectedNodes(const Graph<string> &graph) {
             cout << source << " does not exist in the current network" << endl;
             cout << "USAGE: <node> or 'exit' to terminate" << endl;
         } else {
-            set<string> connected_nodes = graph.GetConnected(source);
+            vector<string> connected_nodes = graph.GetConnected(source);
             if (connected_nodes.empty()) {
                 cout << source << " : no outbound travel" << endl;
             } else {

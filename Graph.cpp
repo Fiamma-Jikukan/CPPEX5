@@ -1,9 +1,9 @@
 #include "Graph.h"
 
-#include <deque>
 #include <iostream>
 #include <ostream>
 #include <queue>
+#include <unordered_set>
 
 template class Graph<string>;
 
@@ -113,22 +113,26 @@ vector<T> Graph<T>::GetNeighbors(T vertex) const {
 }
 
 template<class T>
-set<T> Graph<T>::GetConnected(T vertex) const {
-    set<T> connected;
-    queue<T> q;
-    q.push(vertex);
+vector<T> Graph<T>::GetConnected(T vertex) const {
+    unordered_set<T> connected_set;
+    vector<T> connected;
+    deque<T> q;
+    q.push_back(vertex);
     while (q.empty() == false) {
         T current = q.front();
-        q.pop();
-        if (connected.insert(current).second == false) {
+        q.pop_front();
+        if (connected_set.insert(current).second == false) {
             continue;
         }
+        connected.push_back(current);
+
         vector<T> neighbors = GetNeighbors(current);
+
         for (unsigned int i = 0; i < neighbors.size(); i++) {
-            q.push(neighbors[i]);
+            q.push_back(neighbors[i]);
         }
     }
-    connected.erase(vertex);
+    connected.erase(connected.begin());
     return connected;
 }
 
