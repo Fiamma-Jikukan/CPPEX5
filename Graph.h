@@ -21,7 +21,7 @@ public:
 
     Graph &operator=(const Graph &other);
 
-    unsigned int getVertexIndex(T vertex) const;
+    int getVertexIndex(T vertex) const;
 
     void AddVertex(T vertex);
 

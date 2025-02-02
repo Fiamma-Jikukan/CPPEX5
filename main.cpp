@@ -6,7 +6,7 @@
 #include "Graph.h"
 using namespace std;
 
-void PrintSet(const set<string> &s);
+void PrintConnected(const set<string> &s);
 
 bool ValidateFile(const string &fileName);
 
@@ -44,9 +44,9 @@ int main(const int argc, char **argv) {
     return 0;
 }
 
-void PrintSet(const set<string> &s) {
+void PrintConnected(const set<string> &s) {
     for (const auto &it: s) {
-        cout << it << " ";
+        cout << it << "\t";
     }
     cout << endl;
 }
@@ -131,14 +131,14 @@ void SearchConnectedNodes(const Graph<string> &graph) {
         }
         if (graph.getVertexIndex(source) == -1) {
             cout << source << " does not exist in the current network" << endl;
-            cout << "USAGE: node or 'exit' to terminate" << endl;
+            cout << "USAGE: <node> or 'exit' to terminate" << endl;
         } else {
             set<string> connected_nodes = graph.GetConnected(source);
             if (connected_nodes.empty()) {
-                cout << source << ": no outbound travel" << endl;
+                cout << source << " : no outbound travel" << endl;
             } else {
-                cout << source << ": ";
-                PrintSet(connected_nodes);
+                cout << source << '\t';
+                PrintConnected(connected_nodes);
             }
         }
     }

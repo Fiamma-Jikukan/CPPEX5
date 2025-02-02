@@ -22,7 +22,7 @@ template<class T>
 Graph<T> &Graph<T>::operator=(const Graph &other) = default;
 
 template<class T>
-unsigned int Graph<T>::getVertexIndex(T vertex) const {
+int Graph<T>::getVertexIndex(T vertex) const {
     if (vertices.size() == 0) {
         return -1;
     }
@@ -36,8 +36,8 @@ unsigned int Graph<T>::getVertexIndex(T vertex) const {
 
 template<class T>
 void Graph<T>::AddVertex(T vertex) {
-    unsigned int index = Graph<T>::getVertexIndex(vertex);
-    unsigned int size = vertices.size();
+    const int index = Graph<T>::getVertexIndex(vertex);
+    const unsigned int size = vertices.size();
     if (index == -1) {
         vertices.push_back(vertex);
         for (unsigned int i = 0; i <= size; i++) {
@@ -50,7 +50,7 @@ void Graph<T>::AddVertex(T vertex) {
 
 template<class T>
 void Graph<T>::RemoveVertex(T vertex) {
-    unsigned int index = Graph<T>::getVertexIndex(vertex);
+    const int index = Graph<T>::getVertexIndex(vertex);
     if (index == -1) {
         return;
     }
@@ -63,8 +63,8 @@ void Graph<T>::RemoveVertex(T vertex) {
 
 template<class T>
 void Graph<T>::AddEdge(T source, T target, const double weight) {
-    unsigned int source_index = Graph<T>::getVertexIndex(source);
-    unsigned int target_index = Graph<T>::getVertexIndex(target);
+    int source_index = Graph<T>::getVertexIndex(source);
+    int target_index = Graph<T>::getVertexIndex(target);
     if (source_index == -1) {
         AddVertex(source);
     }
