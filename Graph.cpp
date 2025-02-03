@@ -1,9 +1,5 @@
 #include "Graph.h"
 
-#include <iostream>
-#include <ostream>
-#include <queue>
-#include <unordered_set>
 
 template class Graph<string>;
 
@@ -22,11 +18,26 @@ template<class T>
 Graph<T> &Graph<T>::operator=(const Graph &other) = default;
 
 template<class T>
+Graph<T>::Graph(Graph &&other) noexcept
+    : vertices(std::move(other.vertices)),
+      adjList(std::move(other.adjList)) {
+}
+
+template<class T>
+Graph<T> &Graph<T>::operator=(Graph &&other) noexcept {
+    if (this == &other)
+        return *this;
+    vertices = std::move(other.vertices);
+    adjList = std::move(other.adjList);
+    return *this;
+}
+
+template<class T>
 int Graph<T>::getVertexIndex(T vertex) const {
     if (vertices.size() == 0) {
         return -1;
     }
-    for (unsigned int i = 0; i < vertices.size(); i++) {
+    for (int i = 0; i < vertices.size(); i++) {
         if (vertices[i] == vertex) {
             return i;
         }
@@ -36,7 +47,7 @@ int Graph<T>::getVertexIndex(T vertex) const {
 
 template<class T>
 void Graph<T>::AddVertex(T vertex) {
-    const int index = Graph<T>::getVertexIndex(vertex);
+    const int index = getVertexIndex(vertex);
     const unsigned int size = vertices.size();
     if (index == -1) {
         vertices.push_back(vertex);
@@ -125,6 +136,7 @@ vector<T> Graph<T>::GetConnected(T vertex) const {
             continue;
         }
         connected.push_back(current);
+        // if we reached this point, the current element is not already in the connected vector
 
         vector<T> neighbors = GetNeighbors(current);
 

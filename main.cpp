@@ -1,6 +1,4 @@
 #include <fstream>
-#include <iostream>
-#include <vector>
 #include <sstream>
 
 #include "Graph.h"
@@ -46,9 +44,11 @@ int main(const int argc, char **argv) {
 
 void PrintConnected(const vector<string> &s) {
     for (unsigned int i = 0; i < s.size(); i++) {
-        cout << s[i] << '\t';
+        cout << s[i];
+        if (i != s.size() - 1) {
+            cout << "\t";
+        }
     }
-
     cout << endl;
 }
 

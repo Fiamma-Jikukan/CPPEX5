@@ -2,7 +2,8 @@
 #define GRAPH_H
 #include <ostream>
 #include <vector>
-#include <set>
+#include <iostream>
+#include <queue>
 #include <unordered_set>
 
 using namespace std;
@@ -21,6 +22,10 @@ public:
     Graph(const Graph &other);
 
     Graph &operator=(const Graph &other);
+
+    Graph(Graph &&other) noexcept;
+
+    Graph &operator=(Graph &&other) noexcept;
 
     int getVertexIndex(T vertex) const;
 
