@@ -1,5 +1,5 @@
 Lelylaan	Heemstedestraat	10
-Lelylaan	Zuid	6
+Lelyla an	Zuid	6
 Lelylaan	Amstel	9
 Lelylaan	Spaklerweg	11
 Heemstedestraat	Lelylaan	8

@@ -47,8 +47,6 @@ public:
 
     vector<T> GetSources(T target);
 
-    void PrintGraph();
-
     friend ostream &operator<<(ostream &os, const Graph<T> &graph) {
         const unsigned int size = graph.vertices.size();
         for (unsigned int i = 0; i < size; i++) {
