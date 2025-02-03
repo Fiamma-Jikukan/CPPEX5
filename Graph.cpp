@@ -37,7 +37,7 @@ int Graph<T>::getVertexIndex(T vertex) const {
     if (vertices.size() == 0) {
         return -1;
     }
-    for (int i = 0; i < vertices.size(); i++) {
+    for (unsigned int i = 0; i < vertices.size(); i++) {
         if (vertices[i] == vertex) {
             return i;
         }
@@ -85,7 +85,8 @@ void Graph<T>::AddEdge(T source, T target, const double weight) {
     }
     source_index = getVertexIndex(source);
     target_index = getVertexIndex(target);
-    if ((adjList[source_index][target_index] == 0) || (adjList[source_index][target_index] != 0 && adjList[source_index][target_index] > weight)) {
+    if ((adjList[source_index][target_index] == 0) || (
+            adjList[source_index][target_index] != 0 && adjList[source_index][target_index] > weight)) {
         // first condition: there is no Edge
         // second condition: the new weight is smaller than the previous one
         adjList[source_index][target_index] = weight;
@@ -94,8 +95,8 @@ void Graph<T>::AddEdge(T source, T target, const double weight) {
 
 template<class T>
 void Graph<T>::RemoveEdge(T source, T target) {
-    const unsigned int source_index = getVertexIndex(source);
-    const unsigned int target_index = getVertexIndex(target);
+    const int source_index = getVertexIndex(source);
+    const int target_index = getVertexIndex(target);
     if (source_index == -1 || target_index == -1) {
         return;
     }
@@ -104,8 +105,8 @@ void Graph<T>::RemoveEdge(T source, T target) {
 
 template<class T>
 void Graph<T>::SetWeight(T source, T target, const double weight) {
-    const unsigned int source_index = getVertexIndex(source);
-    const unsigned int target_index = getVertexIndex(target);
+    const int source_index = getVertexIndex(source);
+    const int target_index = getVertexIndex(target);
     if (source_index == -1 || target_index == -1) {
         return;
     }
@@ -114,8 +115,8 @@ void Graph<T>::SetWeight(T source, T target, const double weight) {
 
 template<class T>
 double Graph<T>::GetWeight(T source, T target) {
-    const unsigned int source_index = getVertexIndex(source);
-    const unsigned int target_index = getVertexIndex(target);
+    const int source_index = getVertexIndex(source);
+    const int target_index = getVertexIndex(target);
     if (source_index == -1 || target_index == -1) {
         return 0.0;
     }
@@ -168,5 +169,3 @@ vector<T> Graph<T>::GetSources(T target) {
     }
     return sources;
 }
-
-

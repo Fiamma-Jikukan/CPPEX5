@@ -91,7 +91,6 @@ bool ValidateFile(const string &fileName) {
             throw string(errMsg);
         }
         if (source.length() > 16 || target.length() > 16) {
-
             input_file.close();
             throw string(errMsg);
         }
@@ -152,7 +151,8 @@ void SearchConnectedNodes(const Graph<string> &graph) {
         if (source == "exit") {
             return;
         }
-        if (graph.getVertexIndex(source) == -1) {
+        const int index = graph.getVertexIndex(source);
+        if (index == -1) {
             cout << source << " does not exist in the current network" << endl;
             cout << "USAGE: <node> or 'exit' to terminate" << endl;
         } else {
